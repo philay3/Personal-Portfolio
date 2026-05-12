@@ -184,3 +184,36 @@ img {
     flex-wrap: wrap;
     gap: var(--space-sm);
 }
+
+/* ============================================
+   Section Headings (shared)
+   ============================================ */
+.about__heading,
+.skills__heading,
+.projects__heading,
+.current__heading,
+.contact__heading {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--space-md) 0;
+}
+
+/* ============================================
+   About
+   ============================================ */
+.about {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-md);
+}
+
+.about p {
+    font-size: 1.125rem;
+    max-width: 65ch;
+    margin: 0 0 var(--space-md) 0;
+}
+
+.about p:last-child {
+    margin-bottom: 0;
+}

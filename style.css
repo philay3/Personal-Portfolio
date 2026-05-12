@@ -154,35 +154,35 @@ img {
 }
 
 /* ============================================
-   Hero
+   Biography
    ============================================ */
-.hero {
+.biography {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: var(--space-xl) var(--space-md);
 }
 
-.hero__name {
+.biography__name {
     font-size: clamp(2rem, 5vw + 1rem, 3rem);
     font-weight: 700;
     letter-spacing: -0.02em;
     margin: 0 0 var(--space-xs) 0;
 }
 
-.hero__tagline {
+.biography__tagline {
     font-size: 1.25rem;
     font-weight: 500;
     color: var(--color-text-muted);
     margin: 0 0 var(--space-md) 0;
 }
 
-.hero__intro {
+.biography__intro {
     font-size: 1.125rem;
     max-width: 60ch;
     margin: 0 0 var(--space-lg) 0;
 }
 
-.hero__ctas {
+.biography__ctas {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
@@ -191,7 +191,6 @@ img {
 /* ============================================
    Section Headings (shared)
    ============================================ */
-.about__heading,
 .skills__heading,
 .projects__heading,
 .gallery__heading,
@@ -201,25 +200,6 @@ img {
     font-weight: 700;
     letter-spacing: -0.01em;
     margin: 0 0 var(--space-md) 0;
-}
-
-/* ============================================
-   About
-   ============================================ */
-.about {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: var(--space-lg) var(--space-md);
-}
-
-.about p {
-    font-size: 1.125rem;
-    max-width: 65ch;
-    margin: 0 0 var(--space-md) 0;
-}
-
-.about p:last-child {
-    margin-bottom: 0;
 }
 
 /* ============================================

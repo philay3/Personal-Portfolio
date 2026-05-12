@@ -92,6 +92,9 @@ img {
 }
 
 .site-nav__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
     font-weight: 700;
     font-size: 1.25rem;
     color: var(--color-text);
@@ -191,6 +194,7 @@ img {
 .about__heading,
 .skills__heading,
 .projects__heading,
+.gallery__heading,
 .current__heading,
 .contact__heading {
     font-size: 1.75rem;
@@ -311,6 +315,15 @@ img {
     .project {
         grid-template-columns: 1fr;
     }
+}
+
+/* ============================================
+   Gallery
+   ============================================ */
+.gallery {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-md);
 }
 
 /* ============================================

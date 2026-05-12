@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of Phil Anthony, AI-augmented builder and security-minded software engineer.">
+    <meta name="description"
+        content="Portfolio of Phil Anthony, AI-augmented builder and security-minded software engineer.">
     <title>philay3 | AI-Augmented Builder</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header class="site-header">
         <nav class="site-nav" aria-label="Primary">
-            <a href="#" class="site-nav__brand">Phil Anthony</a>
+            <a href="#" class="site-nav__brand">
+                <svg class="site-nav__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                    height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" aria-hidden="true">
+                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                </svg>
+            </a>
             <ul class="site-nav__links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about">Biography</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="https://your-substack.substack.com" target="_blank"
+                        rel="noopener noreferrer">Newsletter</a></li>
+                <li><a href="https://your-blog-url" target="_blank" rel="noopener noreferrer">Blog</a></li>
+                <li><a href="https://github.com/philay3" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><a href="https://linkedin.com/in/your-handle" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </li>
+                <li><a href="https://twitter.com/your-handle" target="_blank" rel="noopener noreferrer">Twitter</a></li>
             </ul>
         </nav>
     </header>
@@ -25,7 +40,10 @@
             <h1 class="hero__name">philay3</h1>
             <p class="hero__tagline">AI-Augmented Builder & Security-Minded Software Engineer</p>
             <p class="hero__intro">
-                I write code, build tools, and create solutions that leverage AI to enhance productivity and security. With a passion for innovation and a focus on secure software development, I strive to deliver high-quality projects that make a difference. Explore my portfolio to see how I combine technical expertise with creativity to solve complex problems.
+                I write code, build tools, and create solutions that leverage AI to enhance productivity and security.
+                With a passion for innovation and a focus on secure software development, I strive to deliver
+                high-quality projects that make a difference. Explore my portfolio to see how I combine technical
+                expertise with creativity to solve complex problems.
             </p>
             <div class="hero__ctas">
                 <a href="#projects" class="btn btn--primary">See My Work</a>
@@ -37,7 +55,9 @@
         <section class="about" id="about">
             <h2>whoami</h2>
             <p>
-                I'm three weeks into an AI augmented bootcamp, learning to design, build, and ship software the way the field is actually moving: with AI as a daily collaborator in the workflow, not a feature bolted on after the fact.
+                I'm three weeks into an AI augmented bootcamp, learning to design, build, and ship software the way the
+                field is actually moving: with AI as a daily collaborator in the workflow, not a feature bolted on after
+                the fact.
             </p>
 
         </section>
@@ -81,12 +101,15 @@
             <h2 class="projects__heading">Projects</h2>
             <article class="project">
                 <div class="project__media">
-                    <img src="images/digital-footprinter.png" alt="Digital Footprinter homepage with terminal-style green-on-black UI explaining browser fingerprinting." class="project__image">
+                    <img src="images/digital-footprinter.png"
+                        alt="Digital Footprinter homepage with terminal-style green-on-black UI explaining browser fingerprinting."
+                        class="project__image">
                 </div>
                 <div class="project__body">
                     <h3 class="project__title">Digital Footprinter</h3>
                     <p class="project__description">
-                        A browser fingerprinting tool that shows visitors exactly what trackers can read about them: canvas hash, WebRTC IPs, fonts, user agent, screen size, timezone.
+                        A browser fingerprinting tool that shows visitors exactly what trackers can read about them:
+                        canvas hash, WebRTC IPs, fonts, user agent, screen size, timezone.
                     </p>
                     <p class="project__notes">
                         Built vanilla. No frameworks, no libraries, no analytics. Just the platform APIs.
@@ -95,11 +118,18 @@
                         <strong>Stack:</strong> HTML, CSS, JavaScript, GitHub Pages
                     </p>
                     <div class="project__ctas">
-                        <a href="https://kttjdtttsc-jpg.github.io/" class="btn btn--primary" target="_blank" rel="noopener">Live Site</a>
-                        <a href="https://github.com/kttjdtttsc-jpg/kttjdtttsc-jpg.github.io" class="btn" target="_blank" rel="noopener">Source on GitHub</a>
+                        <a href="https://kttjdtttsc-jpg.github.io/" class="btn btn--primary" target="_blank"
+                            rel="noopener">Live Site</a>
+                        <a href="https://github.com/kttjdtttsc-jpg/kttjdtttsc-jpg.github.io" class="btn" target="_blank"
+                            rel="noopener">Source on GitHub</a>
                     </div>
                 </div>
             </article>
+        </section>
+
+        <section class="gallery" id="gallery">
+            <h2 class="gallery__heading">Gallery</h2>
+            <p>Coming soon.</p>
         </section>
 
         <section class="current" id="current">
@@ -129,11 +159,13 @@
             <h2 class="contact__heading">Contact</h2>
             <p class="contact__intro">Want to talk security, code, or both?</p>
             <p class="contact__email">
-                Email: <a href="mailto:philay3@example.com" class="contact__link">philay3@example.com</a>
+                <a href="mailto:philay3@proton.me" class="contact__link">philay3@proton.me</a>
             </p>
             <ul class="contact__social">
-                <li><a href="https://github.com/philay3" class="contact__link" target="_blank" rel="noopener">GitHub</a></li>
-                <li><a href="https://linkedin.com/in/your-handle" class="contact__link" target="_blank" rel="noopener">LinkedIn</a></li>
+                <li><a href="https://github.com/philay3" class="contact__link" target="_blank" rel="noopener">GitHub</a>
+                </li>
+                <li><a href="https://linkedin.com/in/philay3" class="contact__link" target="_blank"
+                        rel="noopener">LinkedIn</a></li>
             </ul>
         </section>
     </main>
@@ -144,4 +176,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

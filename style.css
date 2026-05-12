@@ -191,7 +191,6 @@ img {
 /* ============================================
    Section Headings (shared)
    ============================================ */
-.skills__heading,
 .projects__heading,
 .gallery__heading,
 .current__heading,
@@ -200,45 +199,6 @@ img {
     font-weight: 700;
     letter-spacing: -0.01em;
     margin: 0 0 var(--space-md) 0;
-}
-
-/* ============================================
-   Skills
-   ============================================ */
-.skills {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: var(--space-lg) var(--space-md);
-}
-
-.skills__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--space-lg);
-}
-
-.skill-group__heading {
-    font-size: 1.125rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-text-muted);
-    margin: 0 0 var(--space-sm) 0;
-}
-
-.skill-group__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.skill-group__list li {
-    padding: var(--space-xs) 0;
-    border-bottom: 1px solid var(--color-border);
-}
-
-.skill-group__list li:last-child {
-    border-bottom: none;
 }
 
 /* ============================================

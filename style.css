@@ -256,3 +256,59 @@ img {
 .skill-group__list li:last-child {
     border-bottom: none;
 }
+
+/* ============================================
+   Projects
+   ============================================ */
+.projects {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-md);
+}
+
+.project {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    align-items: start;
+}
+
+.project__image {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+}
+
+.project__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 var(--space-sm) 0;
+}
+
+.project__description,
+.project__notes {
+    margin: 0 0 var(--space-md) 0;
+}
+
+.project__stack {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-md) 0;
+}
+
+.project__stack strong {
+    color: var(--color-text);
+}
+
+.project__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+/* Stack on narrow screens */
+@media (max-width: 700px) {
+    .project {
+        grid-template-columns: 1fr;
+    }
+}

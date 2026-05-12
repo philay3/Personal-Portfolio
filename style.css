@@ -119,3 +119,68 @@ img {
     color: var(--color-accent);
     text-decoration: none;
 }
+
+/* ============================================
+   Buttons (reusable)
+   ============================================ */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    border: 1px solid var(--color-text);
+    background-color: transparent;
+    color: var(--color-text);
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn:hover {
+    text-decoration: none;
+    background-color: var(--color-text);
+    color: var(--color-bg);
+}
+
+.btn--primary {
+    background-color: var(--color-text);
+    color: var(--color-bg);
+}
+
+.btn--primary:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+/* ============================================
+   Hero
+   ============================================ */
+.hero {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-md);
+}
+
+.hero__name {
+    font-size: clamp(2rem, 5vw + 1rem, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--space-xs) 0;
+}
+
+.hero__tagline {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-md) 0;
+}
+
+.hero__intro {
+    font-size: 1.125rem;
+    max-width: 60ch;
+    margin: 0 0 var(--space-lg) 0;
+}
+
+.hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}

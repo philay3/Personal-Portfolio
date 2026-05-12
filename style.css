@@ -193,8 +193,7 @@ img {
    ============================================ */
 .projects__heading,
 .gallery__heading,
-.current__heading,
-.contact__heading {
+.current__heading {
     font-size: 1.75rem;
     font-weight: 700;
     letter-spacing: -0.01em;
@@ -303,35 +302,6 @@ img {
 
 .current-group__list li:last-child {
     border-bottom: none;
-}
-
-/* ============================================
-   Contact
-   ============================================ */
-.contact {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: var(--space-lg) var(--space-md);
-}
-
-.contact__intro {
-    font-size: 1.125rem;
-    max-width: 60ch;
-    margin: 0 0 var(--space-md) 0;
-}
-
-.contact__email {
-    font-size: 1.0625rem;
-    margin: 0 0 var(--space-md) 0;
-}
-
-.contact__social {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-md);
 }
 
 /* ============================================

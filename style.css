@@ -196,6 +196,7 @@ img {
    Section Headings (shared)
    ============================================ */
 .projects__heading,
+.articles__heading,
 .gallery__heading,
 .current__heading {
     font-size: 1.75rem;
@@ -251,6 +252,51 @@ img {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm);
+}
+
+/* ============================================
+   Articles
+   ============================================ */
+.articles {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-md);
+}
+
+.articles__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-md);
+}
+
+.article-card__thumb {
+    aspect-ratio: 1 / 1;
+    background-color: #000;
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-md);
+    font-family: ui-serif, Georgia, "Times New Roman", serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 2.5vw + 0.5rem, 2.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-sm);
+}
+
+.article-card__title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.articles__cta {
+    margin-top: var(--space-lg);
+    text-align: center;
 }
 
 /* Stack on narrow screens */

@@ -164,6 +164,23 @@ img {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: var(--space-xl) var(--space-md);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.biography__avatar {
+    flex-shrink: 0;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.biography__content {
+    flex: 1;
+    min-width: 250px;
 }
 
 .biography__name {

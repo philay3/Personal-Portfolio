@@ -104,6 +104,10 @@ img {
     text-decoration: none;
 }
 
+.site-nav__links a.is-active {
+    color: var(--color-accent);
+}
+
 .site-nav__links {
     list-style: none;
     margin: 0;

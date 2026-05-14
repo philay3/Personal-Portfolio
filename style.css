@@ -119,7 +119,13 @@ img {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: var(--space-md);
+}
+
+.site-nav__icon-link {
+    display: inline-flex;
+    align-items: center;
 }
 
 .site-nav__links a {

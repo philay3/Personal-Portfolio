@@ -620,6 +620,19 @@ body {
                     { id: "w2d3l7", title: "Debug a multi-file project", date: "May 6, 2026" },
                     { id: "w2d3l8", title: "Peer activity: bug story walkthrough", date: "May 6, 2026" }
                 ]
+            },
+            {
+                day: 4,
+                title: "Functions and rendering",
+                labs: [
+                    { id: "w2d4l1", title: "First functions in the console", date: "May 7, 2026" },
+                    { id: "w2d4l2", title: "Loop over an array", date: "May 7, 2026" },
+                    { id: "w2d4l3", title: "Render a list from an array of objects", date: "May 7, 2026" },
+                    { id: "w2d4l4", title: "AI refactor my code", date: "May 7, 2026" },
+                    { id: "w2d4l5", title: "Todo list mini-app", date: "May 7, 2026" },
+                    { id: "w2d4l6", title: "Peer activity: explain renderTasks", date: "May 7, 2026" },
+                    { id: "w2d4l7", title: "Going deeper: localStorage persistence", date: "May 7, 2026" }
+                ]
             }
         ]
     },

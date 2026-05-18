@@ -72,7 +72,10 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
+    object-fit: cover;
+    object-position: top;
 }
+
 
 /* ============================================
    Site Header & Nav
@@ -221,12 +224,11 @@ img {
    ============================================ */
 .projects__heading,
 .articles__heading,
-.gallery__heading
-{
-font-size: 1.75rem;
-font-weight: 700;
-letter-spacing: -0.01em;
-margin: 0 0 var(--space-md) 0;
+.gallery__heading {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--space-md) 0;
 }
 
 /* ============================================
@@ -238,45 +240,50 @@ margin: 0 0 var(--space-md) 0;
     padding: var(--space-lg) var(--space-md);
 }
 
+.projects__scroller {
+    display: flex;
+    gap: var(--space-md);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: var(--space-md);
+    padding-bottom: var(--space-sm);
+}
+
 .project {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-lg);
-    align-items: start;
+    flex: 0 0 360px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
 }
 
 .project__image {
     width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top;
     border-radius: 8px;
     border: 1px solid var(--color-border);
 }
 
+.project__link {
+    display: block;
+    color: inherit;
+}
+
+.project__link:hover {
+    text-decoration: none;
+}
+
+.project__link:hover .project__image {
+    border-color: var(--color-accent);
+}
 .project__title {
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0 0 var(--space-sm) 0;
 }
 
-.project__description,
-.project__notes {
-    margin: 0 0 var(--space-md) 0;
-}
-
-.project__stack {
-    font-size: 0.9375rem;
-    color: var(--color-text-muted);
-    margin: 0 0 var(--space-md) 0;
-}
-
-.project__stack strong {
-    color: var(--color-text);
-}
-
-.project__ctas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-}
 
 /* ============================================
    Articles

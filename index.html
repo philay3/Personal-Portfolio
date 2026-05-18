@@ -58,32 +58,30 @@
 
         <section class="projects" id="projects">
             <h2 class="projects__heading">Projects</h2>
-            <article class="project">
-                <div class="project__media">
-                    <img src="images/digital-footprinter.png"
-                        alt="Digital Footprinter homepage with terminal-style green-on-black UI explaining browser fingerprinting."
-                        class="project__image">
-                </div>
-                <div class="project__body">
-                    <h3 class="project__title">Digital Footprinter</h3>
-                    <p class="project__description">
-                        A browser fingerprinting tool that shows visitors exactly what trackers can read about them:
-                        canvas hash, WebRTC IPs, fonts, user agent, screen size, timezone.
-                    </p>
-                    <p class="project__notes">
-                        Built vanilla. No frameworks, no libraries, no analytics. Just the platform APIs.
-                    </p>
-                    <p class="project__stack">
-                        <strong>Stack:</strong> HTML, CSS, JavaScript, GitHub Pages
-                    </p>
-                    <div class="project__ctas">
-                        <a href="https://kttjdtttsc-jpg.github.io/" class="btn btn--primary" target="_blank"
-                            rel="noopener noreferrer">Live Site</a>
-                        <a href="https://github.com/kttjdtttsc-jpg/kttjdtttsc-jpg.github.io" class="btn" target="_blank"
-                            rel="noopener noreferrer">Source on GitHub</a>
-                    </div>
-                </div>
-            </article>
+            <div class="projects__scroller">
+                <article class="project">
+                    <a href="https://kttjdtttsc-jpg.github.io/" class="project__link" target="_blank"
+                        rel="noopener noreferrer">
+                        <div class="project__media">
+                            <img src="images/digital-footprinter.png"
+                                alt="Digital Footprinter homepage with terminal-style green-on-black UI explaining browser fingerprinting."
+                                class="project__image">
+                        </div>
+                        <h3 class="project__title">Digital Footprinter</h3>
+                    </a>
+                </article>
+
+                <article class="project">
+                    <a href="https://philanthony.dev/labs/" class="project__link" target="_blank" rel="noopener noreferrer">
+                        <div class="project__media">
+                            <img src="images/labsnc.png"
+                                alt="Next Chapter Labs interface showing a sidebar tree of weeks and days with a lab writeup in the main pane."
+                                class="project__image">
+                        </div>
+                        <h3 class="project__title">Next Chapter Labs</h3>
+                    </a>
+                </article>
+            </div>
         </section>
 
         <section class="articles" id="articles">

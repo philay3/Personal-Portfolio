@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A living journal of labs from the Next Chapter AI Augmented Builder Bootcamp.">
+    <title>Next Chapter Labs | Phil Anthony</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header__inner">
+            <h1 class="site-header__title">Next Chapter Labs</h1>
+            <p class="site-header__subtitle">A journal of labs from the Next Chapter AI Augmented Builder Bootcamp</p>
+        </div>
+    </header>
+
+    <div class="app">
+        <aside class="sidebar" aria-label="Lab navigation">
+            <nav class="tree" id="tree">
+                <!-- Tree renders here from labs.js via script.js -->
+            </nav>
+        </aside>
+
+        <main class="content" id="content">
+            <div class="empty-state">
+                <h2 class="empty-state__title">Pick a lab from the sidebar</h2>
+                <p class="empty-state__hint">Click a week to expand it, then a day to see the labs inside.</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="labs.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

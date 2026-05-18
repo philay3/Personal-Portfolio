@@ -1,0 +1,395 @@
+/* ============================================
+   Design Tokens
+   ============================================ */
+:root {
+    /* Colors - Balsam & Cedar (matches portfolio) */
+    --color-bg: #f5f0e6;
+    --color-bg-alt: #ebe3d0;
+    --color-text: #1f2d22;
+    --color-text-muted: #5c5247;
+    --color-accent: #2d4a37;
+    --color-accent-warm: #a87f4f;
+    --color-emphasis: #a8312a;
+    --color-border: #d4c9b3;
+
+    /* Typography */
+    --font-heading: "Fraunces", ui-serif, Georgia, serif;
+    --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 3rem;
+    --space-xl: 5rem;
+
+    /* Layout */
+    --sidebar-width: 280px;
+    --max-width: 1400px;
+}
+
+/* ============================================
+   Reset
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    font-family: inherit;
+    font-size: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    text-align: left;
+    padding: 0;
+}
+
+/* ============================================
+   Base
+   ============================================ */
+body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    line-height: 1.2;
+    margin: 0;
+}
+
+a {
+    color: var(--color-emphasis);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ============================================
+   Site Header
+   ============================================ */
+.site-header {
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.site-header__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-md);
+}
+
+.site-header__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem 0;
+}
+
+.site-header__subtitle {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+/* ============================================
+   App Layout
+   ============================================ */
+.app {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    min-height: 70vh;
+}
+
+.sidebar {
+    background-color: var(--color-bg-alt);
+    border-right: 1px solid var(--color-border);
+    padding: var(--space-md);
+}
+
+.content {
+    padding: var(--space-lg) var(--space-md);
+}
+
+/* ============================================
+   Tree
+   ============================================ */
+.tree__week,
+.tree__day {
+    margin-bottom: 0.125rem;
+}
+
+/* Hide default disclosure triangle (both webkit and modern browsers) */
+.tree__week-label::-webkit-details-marker,
+.tree__day-label::-webkit-details-marker {
+    display: none;
+}
+
+.tree__week-label,
+.tree__day-label {
+    list-style: none;
+    cursor: pointer;
+    padding: 0.375rem 0.5rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tree__week-label:hover,
+.tree__day-label:hover {
+    background-color: var(--color-bg);
+}
+
+/* Custom disclosure triangle that rotates when open */
+.tree__week-label::before,
+.tree__day-label::before {
+    content: "▸";
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    transition: transform 0.15s ease;
+    display: inline-block;
+    width: 0.75rem;
+}
+
+.tree__week[open] > .tree__week-label::before,
+.tree__day[open] > .tree__day-label::before {
+    transform: rotate(90deg);
+}
+
+/* Week level */
+.tree__week-label {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+/* Day level */
+.tree__days {
+    padding-left: 1.25rem;
+}
+
+.tree__day-label {
+    font-weight: 500;
+    color: var(--color-text);
+    font-size: 0.9375rem;
+}
+
+/* Lab level */
+.tree__labs {
+    padding-left: 1.25rem;
+}
+
+.tree__lab {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.5rem 0.375rem 1.25rem;
+    border-radius: 4px;
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.tree__lab:hover {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+.tree__lab.is-active {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+}
+
+/* ============================================
+   Empty State
+   ============================================ */
+.empty-state {
+    max-width: 400px;
+    margin: var(--space-xl) auto;
+    text-align: center;
+    color: var(--color-text-muted);
+}
+
+.empty-state__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 var(--space-sm) 0;
+    color: var(--color-text);
+}
+
+.empty-state__hint {
+    margin: 0;
+}
+
+/* ============================================
+   Lab Writeup
+   ============================================ */
+.lab {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.lab__header {
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.lab__title {
+    font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--space-xs) 0;
+}
+
+.lab__date {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+.lab__section {
+    margin-bottom: var(--space-lg);
+}
+
+.lab__section-title {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 var(--space-sm) 0;
+}
+
+.lab__code {
+    background-color: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: var(--space-sm);
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.lab__screenshots {
+    display: grid;
+    gap: var(--space-sm);
+}
+
+.lab__screenshot {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+}
+
+/* ============================================
+   Markdown-Rendered Lab Body
+   ============================================ */
+.lab__body h3 {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: var(--space-lg) 0 var(--space-sm) 0;
+}
+
+.lab__body > h3:first-child {
+    margin-top: 0;
+}
+
+.lab__body p {
+    margin: 0 0 var(--space-md) 0;
+}
+
+.lab__body pre {
+    background-color: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: var(--space-sm);
+    overflow-x: auto;
+    margin: 0 0 var(--space-md) 0;
+}
+
+.lab__body pre code {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.lab__body :not(pre) > code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background-color: var(--color-bg-alt);
+    padding: 0.125em 0.375em;
+    border-radius: 3px;
+}
+
+.lab__body ul,
+.lab__body ol {
+    margin: 0 0 var(--space-md) 0;
+    padding-left: 1.5rem;
+}
+
+.lab__body li {
+    margin-bottom: 0.25rem;
+}
+
+.lab__body a {
+    color: var(--color-emphasis);
+    text-decoration: underline;
+}
+
+.lab__body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    margin: 0 0 var(--space-md) 0;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 700px) {
+    .app {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+    }
+}

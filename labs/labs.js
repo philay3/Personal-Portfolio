@@ -595,6 +595,17 @@ body {
                         learned: "Premium feel comes from a stack of small details, not one big change. System fonts feel native because they ARE native. Transitions soften every state change. Max-width keeps long lines from feeling sloppy on wide screens."
                     }
                 ]
+            },
+            {
+                day: 2,
+                title: "Forms and DOM basics",
+                labs: [
+                    { id: "w2d2l1", title: "Build a contact form", date: "May 5, 2026" },
+                    { id: "w2d2l2", title: "The Greet Me page", date: "May 5, 2026" },
+                    { id: "w2d2l3", title: "Two-question survey", date: "May 5, 2026" },
+                    { id: "w2d2l4", title: "AI, build me an interactive thing", date: "May 5, 2026" },
+                    { id: "w2d2l5", title: "Counter module styled as a calculator", date: "May 5, 2026" }
+                ]
             }
         ]
     },

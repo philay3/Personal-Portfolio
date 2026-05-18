@@ -123,6 +123,18 @@ const labsData = [
                     { id: "w3d1l4", title: "Styling with constraints", date: "May 11, 2026" },
                     { id: "w3d1l5", title: "Scroll spy with Intersection Observer", date: "May 11, 2026" }
                 ]
+            },
+            {
+                day: 2,
+                title: "Build day",
+                labs: [
+                    { id: "w3d2l1", title: "Standup and today's plan", date: "May 12, 2026" },
+                    { id: "w3d2l2", title: "Checkpoint 1: HTML complete", date: "May 12, 2026" },
+                    { id: "w3d2l3", title: "Checkpoint 2: CSS applied", date: "May 12, 2026" },
+                    { id: "w3d2l4", title: "Checkpoint 3: Scroll spy live", date: "May 12, 2026" },
+                    { id: "w3d2l5", title: "Verification and change tracking", date: "May 12, 2026" },
+                    { id: "w3d2l6", title: "Peer demo and reflection", date: "May 12, 2026" }
+                ]
             }
         ]
     },

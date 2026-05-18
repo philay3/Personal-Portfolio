@@ -1,90 +1,32 @@
-// DOM references
-const tree = document.getElementById('tree');
-const content = document.getElementById('content');
+// Active section highlighting via Intersection Observer
+// As the user scrolls, the nav link for the section currently in view
+// gets the .is-active class. CSS does the color change.
 
-// Render the sidebar tree from labsData
-function renderTree() {
-    const html = labsData.map(week => `
-        <details class="tree__week">
-            <summary class="tree__week-label">Week ${week.week}: ${week.title}</summary>
-            <ul class="tree__days">
-                ${week.days.map(day => `
-                    <li>
-                        <details class="tree__day">
-                            <summary class="tree__day-label">Day ${day.day}: ${day.title}</summary>
-                            <ul class="tree__labs">
-                                ${day.labs.map(lab => `
-                                    <li>
-                                        <button class="tree__lab" data-lab-id="${lab.id}" type="button">
-                                            ${lab.title}
-                                        </button>
-                                    </li>
-                                `).join('')}
-                            </ul>
-                        </details>
-                    </li>
-                `).join('')}
-            </ul>
-        </details>
-    `).join('');
-    tree.innerHTML = html;
-}
+const sections = document.querySelectorAll("main section");
+const navLinks = document.querySelectorAll(".site-nav__links a");
 
-// Find a lab by id, walking weeks and days
-function findLab(labId) {
-    for (const week of labsData) {
-        for (const day of week.days) {
-            const lab = day.labs.find(l => l.id === labId);
-            if (lab) return lab;
+const observer = new IntersectionObserver(
+    (entries) => {
+        for (const entry of entries) {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                for (const link of navLinks) {
+                    link.classList.toggle(
+                        "is-active",
+                        link.getAttribute("href") === `#${id}`
+                    );
+                }
+            }
         }
+    },
+    {
+        // Fire when the section is roughly centered in the viewport,
+        // not the instant its top edge crosses in.
+        rootMargin: "-40% 0px -40% 0px",
+        threshold: 0,
     }
-    return null;
+);
+
+for (const section of sections) {
+    observer.observe(section);
 }
-
-// Render a lab's writeup by fetching its markdown content
-async function renderLab(labId) {
-    const lab = findLab(labId);
-    if (!lab) return;
-
-    // Mark active in the tree immediately so the click feels responsive
-    document.querySelectorAll('.tree__lab').forEach(btn => btn.classList.remove('is-active'));
-    document.querySelector(`.tree__lab[data-lab-id="${labId}"]`)?.classList.add('is-active');
-
-    try {
-        const response = await fetch(`content/${labId}.md`);
-        if (!response.ok) {
-            throw new Error(`Failed to load ${labId}.md (status ${response.status})`);
-        }
-        const markdown = await response.text();
-        content.innerHTML = `
-            <article class="lab">
-                <header class="lab__header">
-                    <h2 class="lab__title">${lab.title}</h2>
-                    <p class="lab__date">${lab.date}</p>
-                </header>
-                <div class="lab__body">${marked.parse(markdown)}</div>
-            </article>
-        `;
-    } catch (error) {
-        console.error(error);
-        content.innerHTML = `
-            <article class="lab">
-                <header class="lab__header">
-                    <h2 class="lab__title">${lab.title}</h2>
-                    <p class="lab__date">${lab.date}</p>
-                </header>
-                <p>Couldn't load this lab's content. Try refreshing.</p>
-            </article>
-        `;
-    }
-}
-
-// One delegated click handler for the whole tree
-tree.addEventListener('click', (event) => {
-    const labButton = event.target.closest('.tree__lab');
-    if (labButton) {
-        renderLab(labButton.dataset.labId);
-    }
-});
-
-renderTree();

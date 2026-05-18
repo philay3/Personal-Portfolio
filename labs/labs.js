@@ -135,6 +135,18 @@ const labsData = [
                     { id: "w3d2l5", title: "Verification and change tracking", date: "May 12, 2026" },
                     { id: "w3d2l6", title: "Peer demo and reflection", date: "May 12, 2026" }
                 ]
+            },
+            {
+                day: 3,
+                title: "Polish and deploy",
+                labs: [
+                    { id: "w3d3l1", title: "Polish checklist", date: "May 13, 2026" },
+                    { id: "w3d3l2", title: "Responsive check at three viewports", date: "May 13, 2026" },
+                    { id: "w3d3l3", title: "Deploy verification", date: "May 13, 2026" },
+                    { id: "w3d3l4", title: "Sharing the live site", date: "May 13, 2026" },
+                    { id: "w3d3l5", title: "Presentation prep", date: "May 13, 2026" },
+                    { id: "w3d3l6", title: "Peer demo and end-of-week reflection", date: "May 13, 2026" }
+                ]
             }
         ]
     },

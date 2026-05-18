@@ -606,6 +606,20 @@ body {
                     { id: "w2d2l4", title: "AI, build me an interactive thing", date: "May 5, 2026" },
                     { id: "w2d2l5", title: "Counter module styled as a calculator", date: "May 5, 2026" }
                 ]
+            },
+            {
+                day: 3,
+                title: "Debugging",
+                labs: [
+                    { id: "w2d3l1", title: "Break your Day 2 page on purpose", date: "May 6, 2026" },
+                    { id: "w2d3l2", title: "Read the error", date: "May 6, 2026" },
+                    { id: "w2d3l3", title: "Console.log detective", date: "May 6, 2026" },
+                    { id: "w2d3l4", title: "DevTools scavenger hunt", date: "May 6, 2026" },
+                    { id: "w2d3l5", title: "Fix AI's bugs", date: "May 6, 2026" },
+                    { id: "w2d3l6", title: "Describe a bug to AI", date: "May 6, 2026" },
+                    { id: "w2d3l7", title: "Debug a multi-file project", date: "May 6, 2026" },
+                    { id: "w2d3l8", title: "Peer activity: bug story walkthrough", date: "May 6, 2026" }
+                ]
             }
         ]
     },

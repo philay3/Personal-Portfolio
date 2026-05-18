@@ -109,7 +109,23 @@ const labsData = [
             }
         ]
     },
-    { week: 3, title: "TBD", days: [] },
+    {
+        week: 3,
+        title: "Personal portfolio",
+        days: [
+            {
+                day: 1,
+                title: "Scoping and shipping",
+                labs: [
+                    { id: "w3d1l1", title: "Scope and wireframe", date: "May 11, 2026" },
+                    { id: "w3d1l2", title: "Repo setup and Vercel deploy", date: "May 11, 2026" },
+                    { id: "w3d1l3", title: "AI scaffolding the HTML", date: "May 11, 2026" },
+                    { id: "w3d1l4", title: "Styling with constraints", date: "May 11, 2026" },
+                    { id: "w3d1l5", title: "Scroll spy with Intersection Observer", date: "May 11, 2026" }
+                ]
+            }
+        ]
+    },
     { week: 4, title: "TBD", days: [] },
     { week: 5, title: "TBD", days: [] },
     { week: 6, title: "TBD", days: [] },

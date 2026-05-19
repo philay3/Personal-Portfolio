@@ -150,7 +150,6 @@ const labsData = [
             }
         ]
     },
-    { week: 4, title: "TBD", days: [] },
     {
         week: 4,
         title: "Design thinking",

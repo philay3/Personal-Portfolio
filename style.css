@@ -240,18 +240,13 @@ img {
     padding: var(--space-lg) var(--space-md);
 }
 
-.projects__scroller {
-    display: flex;
+.projects__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: var(--space-md);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding: var(--space-md);
-    padding-bottom: var(--space-sm);
 }
 
 .project {
-    flex: 0 0 360px;
-    scroll-snap-align: start;
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);

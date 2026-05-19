@@ -254,7 +254,7 @@ img {
 
 .project__image {
     width: 100%;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     object-position: top;
     border-radius: 8px;

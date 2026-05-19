@@ -151,6 +151,22 @@ const labsData = [
         ]
     },
     { week: 4, title: "TBD", days: [] },
+    {
+        week: 4,
+        title: "Design thinking",
+        days: [
+            {
+                day: 1,
+                title: "Design thinking workshop",
+                labs: [
+                    { id: "w4d1l1", title: "Problem brainstorm", date: "May 18, 2026" },
+                    { id: "w4d1l2", title: "Stress test", date: "May 18, 2026" },
+                    { id: "w4d1l3", title: "User stories", date: "May 18, 2026" },
+                    { id: "w4d1l4", title: "MVP scope and competitive research", date: "May 18, 2026" }
+                ]
+            }
+        ]
+    },
     { week: 5, title: "TBD", days: [] },
     { week: 6, title: "TBD", days: [] },
     { week: 7, title: "TBD", days: [] },

@@ -259,6 +259,7 @@ img {
     object-position: top;
     border-radius: 8px;
     border: 1px solid var(--color-border);
+    transition: border-color 0.15s ease;
 }
 
 .project__link {
@@ -339,7 +340,7 @@ img {
 
 /* Stack on narrow screens */
 @media (max-width: 700px) {
-    .project {
+    .projects__grid {
         grid-template-columns: 1fr;
     }
 }

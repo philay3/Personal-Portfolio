@@ -41,8 +41,7 @@ function findLab(labId) {
     return null;
 }
 
-// Render a lab's writeup in the main pane
-// Render a lab. Try markdown content first, fall back to legacy data.
+// Render a lab's writeup by fetching its markdown content
 async function renderLab(labId) {
     const lab = findLab(labId);
     if (!lab) return;
@@ -51,70 +50,32 @@ async function renderLab(labId) {
     document.querySelectorAll('.tree__lab').forEach(btn => btn.classList.remove('is-active'));
     document.querySelector(`.tree__lab[data-lab-id="${labId}"]`)?.classList.add('is-active');
 
-    // Try markdown first
     try {
         const response = await fetch(`content/${labId}.md`);
-        if (response.ok) {
-            const markdown = await response.text();
-            content.innerHTML = `
-                <article class="lab">
-                    <header class="lab__header">
-                        <h2 class="lab__title">${lab.title}</h2>
-                        <p class="lab__date">${lab.date}</p>
-                    </header>
-                    <div class="lab__body">${marked.parse(markdown)}</div>
-                </article>
-            `;
-            return;
+        if (!response.ok) {
+            throw new Error(`Failed to load ${labId}.md (status ${response.status})`);
         }
-    } catch (e) {
-        // Network or fetch error, fall through to legacy
-    }
-
-    // Legacy: render from labsData fields
-    renderLegacyLab(lab);
-}
-
-// Legacy renderer using the notes/code/screenshots/learned fields.
-// Will get deleted once all labs are migrated to markdown files.
-function renderLegacyLab(lab) {
-    const codeBlock = lab.code
-        ? `<section class="lab__section">
-               <h3 class="lab__section-title">Code</h3>
-               <pre class="lab__code"><code></code></pre>
-           </section>`
-        : '';
-
-    const screenshotsBlock = lab.screenshots.length
-        ? `<section class="lab__section">
-               <h3 class="lab__section-title">Screenshots</h3>
-               <div class="lab__screenshots">
-                   ${lab.screenshots.map(src => `<img src="${src}" alt="" class="lab__screenshot">`).join('')}
-               </div>
-           </section>`
-        : '';
-
-    content.innerHTML = `
-        <article class="lab">
-            <header class="lab__header">
-                <h2 class="lab__title">${lab.title}</h2>
-                <p class="lab__date">${lab.date}</p>
-            </header>
-            <section class="lab__section">
-                <h3 class="lab__section-title">Notes</h3>
-                <p>${lab.notes}</p>
-            </section>
-            ${codeBlock}
-            ${screenshotsBlock}
-            <section class="lab__section">
-                <h3 class="lab__section-title">What I learned</h3>
-                <p>${lab.learned}</p>
-            </section>
-        </article>
-    `;
-
-    if (lab.code) {
-        content.querySelector('.lab__code code').textContent = lab.code;
+        const markdown = await response.text();
+        content.innerHTML = `
+            <article class="lab">
+                <header class="lab__header">
+                    <h2 class="lab__title">${lab.title}</h2>
+                    <p class="lab__date">${lab.date}</p>
+                </header>
+                <div class="lab__body">${marked.parse(markdown)}</div>
+            </article>
+        `;
+    } catch (error) {
+        console.error(error);
+        content.innerHTML = `
+            <article class="lab">
+                <header class="lab__header">
+                    <h2 class="lab__title">${lab.title}</h2>
+                    <p class="lab__date">${lab.date}</p>
+                </header>
+                <p>Couldn't load this lab's content. Try refreshing.</p>
+            </article>
+        `;
     }
 }
 

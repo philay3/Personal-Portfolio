@@ -5,13 +5,23 @@ const db = new Database('workflows.sqlite');
 
 // WAL mode keeps reads fast while a write is in progress
 db.pragma('journal_mode = WAL');
+// SQLite ships with foreign keys OFF per connection - must enable explicitly
+db.pragma('foreign_keys = ON');
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS workflows (
     id         INTEGER PRIMARY KEY AUTOINCREMENT,
     name       TEXT    NOT NULL,
     created_at TEXT    NOT NULL DEFAULT (datetime('now'))
-  )
+  );
+
+  CREATE TABLE IF NOT EXISTS steps (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    workflow_id INTEGER NOT NULL,
+    name        TEXT    NOT NULL,
+    position    INTEGER NOT NULL,
+    FOREIGN KEY (workflow_id) REFERENCES workflows(id) ON DELETE CASCADE
+  );
 `);
 
 export default db;

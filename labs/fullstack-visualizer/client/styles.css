@@ -401,6 +401,18 @@ button.ghost.danger-text:hover {
   font-size: 0.7rem;
 }
 
+/* Pending row: pulsing left border signals in-flight request */
+@keyframes viz-pulse {
+  0%, 100% { border-left-color: #30363d; }
+  50%       { border-left-color: #58a6ff; }
+}
+
+.viz-row--pending {
+  border-left: 2px solid #30363d;
+  animation: viz-pulse 1s ease-in-out infinite;
+  opacity: 0.75;
+}
+
 /* Expanded row indicator */
 .viz-row--open {
   background: #161b22;

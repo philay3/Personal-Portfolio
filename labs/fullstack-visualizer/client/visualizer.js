@@ -2,16 +2,13 @@ import { apiEvents } from './api.js';
 
 const MAX_ROWS = 100;
 
-// Log entries - array of plain objects, newest last (reversed on render)
+// Log entries mutated in place: start pushes a pending entry, end/error updates it
 const log = [];
 
-// Correlate start/end by id to capture requestBody alongside response data
-const pending = new Map();
-
-// Currently expanded row id for the detail view
+// Currently expanded row id
 let expandedId = null;
 
-// --- DOM refs (panel HTML lives in index.html, owned by this file) ---
+// --- DOM refs ---
 const panel     = document.getElementById('viz-panel');
 const body      = document.getElementById('viz-body');
 const totalEl   = document.getElementById('viz-total');
@@ -20,7 +17,7 @@ const toggleBtn = document.getElementById('viz-toggle');
 const clearBtn  = document.getElementById('viz-clear');
 const closeBtn  = document.getElementById('viz-close');
 
-// --- Panel open/close ---
+// --- Panel controls ---
 toggleBtn.addEventListener('click', () => panel.classList.toggle('viz-panel--closed'));
 closeBtn.addEventListener('click',  () => panel.classList.add('viz-panel--closed'));
 
@@ -30,7 +27,7 @@ clearBtn.addEventListener('click', () => {
   render();
 });
 
-// Click delegation - clicking a row toggles its detail view
+// Click delegation: clicking a viz-row toggles its detail view
 body.addEventListener('click', (e) => {
   const row = e.target.closest('.viz-row');
   if (!row) return;
@@ -51,29 +48,28 @@ function timeLabel(ts) {
 }
 
 function statusClass(row) {
+  if (row.pending)       return 'viz-status--pending';
   if (row.error)         return 'viz-status--error';
-  if (!row.status)       return 'viz-status--pending';
   if (row.status >= 500) return 'viz-status--5xx';
   if (row.status >= 400) return 'viz-status--4xx';
   return 'viz-status--2xx';
 }
 
-// Escape HTML so JSON bodies in <pre> blocks don't break the page
 function esc(str) {
-  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 function prettyJSON(val) {
-  if (val === undefined || val === null) return '';
+  if (val == null) return '';
   return esc(JSON.stringify(val, null, 2));
 }
 
-// --- Row HTML ---
+// --- Row + detail HTML ---
 
 function detailHTML(row) {
-  const reqBody  = row.requestBody  != null ? `<pre class="viz-pre">${prettyJSON(row.requestBody)}</pre>`  : '<span class="viz-detail-none">none</span>';
-  const resBody  = row.responseBody != null ? `<pre class="viz-pre">${prettyJSON(row.responseBody)}</pre>` : '<span class="viz-detail-none">none</span>';
-  const headers  = row.responseHeaders != null ? `<pre class="viz-pre">${prettyJSON(row.responseHeaders)}</pre>` : '<span class="viz-detail-none">none</span>';
+  const reqBody = row.requestBody  != null ? `<pre class="viz-pre">${prettyJSON(row.requestBody)}</pre>`  : '<span class="viz-detail-none">none</span>';
+  const resBody = row.responseBody != null ? `<pre class="viz-pre">${prettyJSON(row.responseBody)}</pre>` : '<span class="viz-detail-none">none</span>';
+  const headers = row.responseHeaders != null ? `<pre class="viz-pre">${prettyJSON(row.responseHeaders)}</pre>` : '<span class="viz-detail-none">none</span>';
   const duration = row.duration != null ? `${Math.round(row.duration)}ms` : '-';
   const errorLine = row.error ? `<div class="viz-detail-field"><span class="viz-detail-label">Error</span><span class="viz-detail-error">${esc(row.error)}</span></div>` : '';
 
@@ -86,7 +82,7 @@ function detailHTML(row) {
     </div>
     <div class="viz-detail-col">
       <div class="viz-detail-heading">Response</div>
-      <div class="viz-detail-field"><span class="viz-detail-label">Status</span><span class="viz-detail-value">${row.status ?? '-'}</span></div>
+      <div class="viz-detail-field"><span class="viz-detail-label">Status</span><span class="viz-detail-value">${row.status ?? (row.pending ? 'pending' : '-')}</span></div>
       <div class="viz-detail-field"><span class="viz-detail-label">Duration</span><span class="viz-detail-value">${duration}</span></div>
       ${errorLine}
       <div class="viz-detail-field"><span class="viz-detail-label">Body</span>${resBody}</div>
@@ -98,13 +94,14 @@ function detailHTML(row) {
 function rowHTML(row) {
   const path      = pathFrom(row.url);
   const time      = timeLabel(row.ts);
-  const status    = row.error ? 'ERR' : (row.status ?? '...');
+  const status    = row.pending ? '...' : row.error ? 'ERR' : row.status;
   const duration  = row.duration != null ? `${Math.round(row.duration)}ms` : '';
-  const errClass  = row.error ? ' viz-row--error' : '';
+  const errClass  = row.error   ? ' viz-row--error'   : '';
+  const pendClass = row.pending ? ' viz-row--pending'  : '';
   const openClass = row.id === expandedId ? ' viz-row--open' : '';
 
   return `<div class="viz-row-wrap">
-    <div class="viz-row${errClass}${openClass}" data-id="${row.id}">
+    <div class="viz-row${errClass}${pendClass}${openClass}" data-id="${row.id}">
       <span class="viz-time">${time}</span>
       <span class="viz-method viz-method--${row.method.toLowerCase()}">${row.method}</span>
       <span class="viz-path" title="${row.url}">${path}</span>
@@ -115,10 +112,8 @@ function rowHTML(row) {
   </div>`;
 }
 
-// --- Full render ---
-
 function render() {
-  const errorCount = log.filter(r => r.error || (r.status && r.status >= 400)).length;
+  const errorCount = log.filter(r => r.error || (!r.pending && r.status >= 400)).length;
 
   totalEl.textContent  = `${log.length} req`;
   errorsEl.textContent = `${errorCount} err`;
@@ -131,40 +126,29 @@ function render() {
 
 // --- Event subscriptions ---
 
-// Store request body on start so it's available when end arrives
+// Push a pending row immediately so in-flight requests are visible
 apiEvents.addEventListener('request:start', (e) => {
   const { id, method, url, requestBody } = e.detail;
-  pending.set(id, { id, method, url, requestBody });
-});
-
-apiEvents.addEventListener('request:end', (e) => {
-  const { id, method, url, status, responseBody, duration, responseHeaders } = e.detail;
-  const started = pending.get(id) ?? {};
-  pending.delete(id);
-
-  log.push({
-    ...started, id,
-    method: started.method ?? method,
-    url:    started.url    ?? url,
-    status, responseBody, duration, responseHeaders,
-    ts: Date.now(),
-  });
+  log.push({ id, method, url, requestBody, ts: Date.now(), pending: true });
   if (log.length > MAX_ROWS) log.shift();
   render();
 });
 
-apiEvents.addEventListener('request:error', (e) => {
-  const { id, method, url, error, duration, status, responseBody } = e.detail;
-  const started = pending.get(id) ?? {};
-  pending.delete(id);
+// Find and mutate the existing entry - no new row pushed
+apiEvents.addEventListener('request:end', (e) => {
+  const { id, status, responseBody, duration, responseHeaders } = e.detail;
+  const entry = log.find(r => r.id === id);
+  if (entry) {
+    Object.assign(entry, { status, responseBody, duration, responseHeaders, pending: false });
+  }
+  render();
+});
 
-  log.push({
-    ...started, id,
-    method: started.method ?? method,
-    url:    started.url    ?? url,
-    error, duration, status, responseBody,
-    ts: Date.now(),
-  });
-  if (log.length > MAX_ROWS) log.shift();
+apiEvents.addEventListener('request:error', (e) => {
+  const { id, error, duration, status, responseBody } = e.detail;
+  const entry = log.find(r => r.id === id);
+  if (entry) {
+    Object.assign(entry, { error, duration, status, responseBody, pending: false });
+  }
   render();
 });

@@ -17,9 +17,22 @@ const toggleBtn = document.getElementById('viz-toggle');
 const clearBtn  = document.getElementById('viz-clear');
 const closeBtn  = document.getElementById('viz-close');
 
+// Start with panel open so the HTTP log is immediately visible
+panel.classList.remove('viz-panel--closed');
+document.body.classList.add('viz-pushed');
+
 // --- Panel controls ---
-toggleBtn.addEventListener('click', () => panel.classList.toggle('viz-panel--closed'));
-closeBtn.addEventListener('click',  () => panel.classList.add('viz-panel--closed'));
+toggleBtn.addEventListener('click', () => {
+  const closing = !panel.classList.contains('viz-panel--closed');
+  panel.classList.toggle('viz-panel--closed');
+  // Push entire page so the panel doesn't overlay the header or main area
+  document.body.classList.toggle('viz-pushed', !closing);
+});
+
+closeBtn.addEventListener('click', () => {
+  panel.classList.add('viz-panel--closed');
+  document.body.classList.remove('viz-pushed');
+});
 
 clearBtn.addEventListener('click', () => {
   log.length = 0;

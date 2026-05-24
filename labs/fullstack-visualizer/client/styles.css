@@ -33,6 +33,15 @@ body {
   overflow: hidden;
 }
 
+/* When viz panel is open, push the entire page (header + layout) */
+body {
+  transition: margin-right 0.2s ease;
+}
+
+body.viz-pushed {
+  margin-right: 420px;
+}
+
 .sidebar {
   width: 260px;
   flex-shrink: 0;

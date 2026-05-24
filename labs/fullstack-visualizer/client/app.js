@@ -8,6 +8,48 @@ const state = {
   steps: [],        // each step has a .tasks array attached after load
 };
 
+// --- Default data seeded when the DB is empty ---
+
+const DEFAULTS = [
+  {
+    name: 'Frontend Workflow',
+    steps: [
+      { name: 'Design',  tasks: ['Wireframe key screens', 'Review with team', 'Finalize component list'] },
+      { name: 'Build',   tasks: ['Set up project scaffold', 'Implement components', 'Wire up API calls'] },
+      { name: 'Test',    tasks: ['Cross-browser check', 'Mobile responsiveness', 'Fix console errors'] },
+      { name: 'Deploy',  tasks: ['Run build', 'Push to staging', 'Smoke test in prod'] },
+    ],
+  },
+  {
+    name: 'Bug Fix Workflow',
+    steps: [
+      { name: 'Reproduce', tasks: ['Find the failing case', 'Write a test that fails'] },
+      { name: 'Fix',       tasks: ['Identify root cause', 'Apply fix', 'Verify test passes'] },
+      { name: 'Ship',      tasks: ['Code review', 'Merge to main', 'Monitor for regressions'] },
+    ],
+  },
+  {
+    name: 'Code Review Workflow',
+    steps: [
+      { name: 'Read',     tasks: ['Understand the goal', 'Check tests exist'] },
+      { name: 'Evaluate', tasks: ['Look for edge cases', 'Check error handling', 'Spot style issues'] },
+      { name: 'Respond',  tasks: ['Leave inline comments', 'Approve or request changes'] },
+    ],
+  },
+];
+
+async function seedDefaults() {
+  for (const wfDef of DEFAULTS) {
+    const wf = await api.workflows.create(wfDef.name);
+    for (const stepDef of wfDef.steps) {
+      const step = await api.steps.create(wf.id, stepDef.name);
+      for (const taskText of stepDef.tasks) {
+        await api.tasks.create(step.id, taskText);
+      }
+    }
+  }
+}
+
 // --- Data loading ---
 
 async function loadWorkflows() {
@@ -57,6 +99,7 @@ function renderWorkflows() {
 
     delBtn.addEventListener('click', async (e) => {
       e.stopPropagation();
+      if (!confirm(`Delete workflow "${wf.name}"? This will also delete all its steps and tasks.`)) return;
       await api.workflows.remove(wf.id);
       if (state.selectedId === wf.id) {
         state.selectedId = null;
@@ -198,4 +241,10 @@ document.getElementById('create-workflow-form').addEventListener('submit', async
 
 // --- Boot ---
 
-loadWorkflows();
+async function init() {
+  const workflows = await api.workflows.list();
+  if (workflows.length === 0) await seedDefaults();
+  await loadWorkflows();
+}
+
+init();

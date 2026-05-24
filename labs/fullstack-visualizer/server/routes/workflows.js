@@ -4,7 +4,7 @@ import db from '../db.js';
 const router = Router();
 
 router.get('/', (req, res) => {
-  const rows = db.prepare('SELECT * FROM workflows ORDER BY id').all();
+  const rows = db.prepare('SELECT * FROM workflows ORDER BY pinned DESC, created_at ASC').all();
   res.json(rows);
 });
 
@@ -51,6 +51,14 @@ router.post('/:workflow_id/steps', (req, res) => {
 
   const row = db.prepare('SELECT * FROM steps WHERE id = ?').get(result.lastInsertRowid);
   res.status(201).json(row);
+});
+
+router.patch('/:id/toggle-pin', (req, res) => {
+  const existing = db.prepare('SELECT id FROM workflows WHERE id = ?').get(req.params.id);
+  if (!existing) return res.status(404).json({ error: 'not found' });
+  db.prepare('UPDATE workflows SET pinned = 1 - pinned WHERE id = ?').run(req.params.id);
+  const row = db.prepare('SELECT * FROM workflows WHERE id = ?').get(req.params.id);
+  res.json(row);
 });
 
 router.get('/:id', (req, res) => {

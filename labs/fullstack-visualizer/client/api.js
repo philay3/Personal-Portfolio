@@ -64,11 +64,12 @@ async function request(method, path, body) {
 
 export const api = {
   workflows: {
-    list:   ()           => request('GET',    '/workflows'),
-    get:    (id)         => request('GET',    `/workflows/${id}`),
-    create: (name)       => request('POST',   '/workflows', { name }),
-    update: (id, name)   => request('PUT',    `/workflows/${id}`, { name }),
-    remove: (id)         => request('DELETE', `/workflows/${id}`),
+    list:      ()           => request('GET',    '/workflows'),
+    get:       (id)         => request('GET',    `/workflows/${id}`),
+    create:    (name)       => request('POST',   '/workflows', { name }),
+    update:    (id, name)   => request('PUT',    `/workflows/${id}`, { name }),
+    remove:    (id)         => request('DELETE', `/workflows/${id}`),
+    togglePin: (id)         => request('PATCH',  `/workflows/${id}/toggle-pin`),
   },
 
   steps: {

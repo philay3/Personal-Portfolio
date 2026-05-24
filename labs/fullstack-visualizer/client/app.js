@@ -85,6 +85,12 @@ function renderWorkflows() {
     nameSpan.title = wf.name;
     nameSpan.textContent = wf.name;
 
+    const pinBtn = document.createElement('button');
+    pinBtn.className = 'ghost pin-btn';
+    pinBtn.title = wf.pinned ? 'Unpin workflow' : 'Pin workflow';
+    pinBtn.textContent = wf.pinned ? '★' : '☆';
+    pinBtn.dataset.id = wf.id;
+
     const delBtn = document.createElement('button');
     delBtn.className = 'ghost danger-text delete-wf-btn';
     delBtn.title = 'Delete workflow';
@@ -95,6 +101,12 @@ function renderWorkflows() {
       state.selectedId = wf.id;
       renderWorkflows();
       loadStepsAndTasks(wf.id);
+    });
+
+    pinBtn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      await api.workflows.togglePin(wf.id);
+      await loadWorkflows();
     });
 
     delBtn.addEventListener('click', async (e) => {
@@ -109,6 +121,7 @@ function renderWorkflows() {
       renderStepsPanel();
     });
 
+    item.appendChild(pinBtn);
     item.appendChild(nameSpan);
     item.appendChild(delBtn);
     list.appendChild(item);
@@ -177,6 +190,7 @@ function renderStepsPanel() {
   // Wire step deletes
   panel.querySelectorAll('.delete-step-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
+      if (!confirm('Delete this step? Its tasks will also be deleted.')) return;
       await api.steps.remove(Number(btn.dataset.id));
       await loadStepsAndTasks(state.selectedId);
     });
@@ -193,6 +207,7 @@ function renderStepsPanel() {
   // Wire task deletes
   panel.querySelectorAll('.delete-task-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
+      if (!confirm('Delete this task?')) return;
       await api.tasks.remove(Number(btn.dataset.id));
       await loadStepsAndTasks(state.selectedId);
     });

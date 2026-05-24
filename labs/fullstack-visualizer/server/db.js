@@ -1,4 +1,5 @@
 import Database from 'better-sqlite3';
+import { seedIfEmpty } from './seed.js';
 
 // Opens (or creates) the file on first use; path is relative to where node runs
 const db = new Database('workflows.sqlite');
@@ -32,5 +33,14 @@ db.exec(`
     FOREIGN KEY (step_id) REFERENCES steps(id) ON DELETE CASCADE
   );
 `);
+
+// Idempotent migration: add pinned column if it doesn't exist yet
+const cols = db.prepare('PRAGMA table_info(workflows)').all();
+const hasPinned = cols.some(c => c.name === 'pinned');
+if (!hasPinned) {
+  db.exec('ALTER TABLE workflows ADD COLUMN pinned INTEGER NOT NULL DEFAULT 0');
+}
+
+seedIfEmpty(db);
 
 export default db;

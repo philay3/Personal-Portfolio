@@ -1,4 +1,5 @@
 import { api } from './api.js';
+import './visualizer.js';
 
 // Global state - single source of truth, re-render on every mutation
 const state = {

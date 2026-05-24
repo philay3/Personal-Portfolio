@@ -9,6 +9,7 @@
 <body>
   <header class="site-header">
     <h1>Workflow Visualizer</h1>
+    <button id="viz-toggle" class="viz-toggle-btn">HTTP Log</button>
   </header>
 
   <main class="layout">
@@ -28,7 +29,22 @@
     </section>
   </main>
 
+  <!-- Visualizer panel - fixed overlay, owned entirely by visualizer.js -->
+  <aside id="viz-panel" class="viz-panel viz-panel--closed">
+    <div class="viz-header">
+      <span class="viz-title">HTTP Log</span>
+      <span id="viz-total" class="viz-count">0 req</span>
+      <span id="viz-errors" class="viz-count viz-count--error" hidden>0 err</span>
+      <button id="viz-clear" class="viz-btn-ghost">Clear</button>
+      <button id="viz-close" class="viz-btn-ghost">x</button>
+    </div>
+    <div class="viz-body" id="viz-body">
+      <p class="viz-empty">No requests yet. Interact with the app.</p>
+    </div>
+  </aside>
+
   <!-- api.js has no DOM access; app.js wires everything together -->
+  <!-- visualizer.js imported for side effects only - boots the HTTP log panel -->
   <script type="module" src="app.js"></script>
 </body>
 </html>

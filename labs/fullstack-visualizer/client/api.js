@@ -1,26 +1,65 @@
 const BASE = 'http://localhost:3000';
 
-// Single chokepoint for all HTTP traffic - Phase 5 instruments this function
+// Single event bus - visualizer.js subscribes to this, app.js never touches it
+export const apiEvents = new EventTarget();
+
+// Single chokepoint for all HTTP traffic - instrumented here so visualizer sees everything
 async function request(method, path, body) {
+  const id = crypto.randomUUID();
+  const url = `${BASE}${path}`;
+  const startTime = performance.now();
+
+  apiEvents.dispatchEvent(new CustomEvent('request:start', {
+    detail: { id, method, url, requestBody: body, startTime }
+  }));
+
   const options = {
     method,
     headers: { 'Content-Type': 'application/json' },
   };
   if (body !== undefined) options.body = JSON.stringify(body);
 
-  const res = await fetch(`${BASE}${path}`, options);
+  try {
+    const res = await fetch(url, options);
 
-  // Parse JSON regardless of status so error bodies are readable
-  const data = await res.json();
+    // Parse JSON regardless of status so error bodies are readable
+    const data = await res.json();
 
-  if (!res.ok) {
-    const err = new Error(data.error || `HTTP ${res.status}`);
-    err.status = res.status;
-    err.data = data;
+    apiEvents.dispatchEvent(new CustomEvent('request:end', {
+      detail: {
+        id, method, url,
+        status: res.status,
+        ok: res.ok,
+        responseBody: data,
+        duration: performance.now() - startTime,
+        responseHeaders: Object.fromEntries(res.headers.entries()),
+      }
+    }));
+
+    if (!res.ok) {
+      const err = new Error(data.error || `HTTP ${res.status}`);
+      err.status = res.status;
+      err.data = data;
+      throw err;
+    }
+
+    return data;
+
+  } catch (err) {
+    // Only emit request:error if this is a network/fetch failure, not a re-throw from above
+    if (!err.status) {
+      apiEvents.dispatchEvent(new CustomEvent('request:error', {
+        detail: {
+          id, method, url,
+          error: err.message,
+          duration: performance.now() - startTime,
+          status: undefined,
+          responseBody: undefined,
+        }
+      }));
+    }
     throw err;
   }
-
-  return data;
 }
 
 export const api = {

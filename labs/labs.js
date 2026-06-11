@@ -158,15 +158,52 @@ const labsData = [
                 day: 1,
                 title: "Design thinking workshop",
                 labs: [
-                    { id: "w4d1l1", title: "Problem brainstorm", date: "May 18, 2026" },
-                    { id: "w4d1l2", title: "Stress test", date: "May 18, 2026" },
-                    { id: "w4d1l3", title: "User stories", date: "May 18, 2026" },
-                    { id: "w4d1l4", title: "MVP scope and competitive research", date: "May 18, 2026" }
+                    { id: "w4d1l1", title: "Lab work", date: "May 18, 2026" }
+                ]
+            },
+            {
+                day: 2,
+                title: "What's an API?",
+                labs: [
+                    { id: "w4d2l1", title: "Lab work", date: "May 19, 2026" }
+                ]
+            },
+            {
+                day: 3,
+                title: "Databases",
+                labs: [
+                    { id: "w4d3l1", title: "Lab work", date: "May 20, 2026" }
+                ]
+            },
+            {
+                day: 4,
+                title: "SQL: Talking to databases",
+                labs: [
+                    { id: "w4d4l1", title: "Lab work", date: "May 21, 2026" }
                 ]
             }
         ]
     },
-    { week: 5, title: "TBD", days: [] },
+    {
+        week: 5,
+        title: "Backend foundations",
+        days: [
+            {
+                day: 1,
+                title: "Node.js and TypeScript basics",
+                labs: [
+                    { id: "w5d1l1", title: "Lab work", date: "May 25, 2026" }
+                ]
+            },
+            {
+                day: 2,
+                title: "React: Thinking in components",
+                labs: [
+                    { id: "w5d2l1", title: "Lab work", date: "May 26, 2026" }
+                ]
+            }
+        ]
+    },
     { week: 6, title: "TBD", days: [] },
     { week: 7, title: "TBD", days: [] },
     { week: 8, title: "TBD", days: [] },

@@ -201,6 +201,13 @@ const labsData = [
                 labs: [
                     { id: "w5d2l1", title: "Lab work", date: "May 26, 2026" }
                 ]
+            },
+            {
+                day: 3,
+                title: "More React: Events, lists, conditional rendering",
+                labs: [
+                    { id: "w5d3l1", title: "Lab work", date: "May 27, 2026" }
+                ]
             }
         ]
     },

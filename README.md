@@ -36,4 +36,4 @@ labs/
 
 Phil Anthony.
 
-[GitHub](https://github.com/philay3) · [LinkedIn](https://www.linkedin.com/in/phil-anthony-270a273a0/) · [Twitter](https://twitter.com/upnupent) · [Substack](https://substack.com/@philay3)
+[GitHub](https://github.com/philay3) · [LinkedIn](https://www.linkedin.com/in/phillip-anthony-75280778/) · [Twitter](https://twitter.com/upnupent) · [Substack](https://substack.com/@philay3)

@@ -33,7 +33,7 @@ const projects: Project[] = [
   },
   {
     title: "Fullstack Visualizer",
-    link: "https://github.com/philay3/fullstack-workflow-visualizer",
+    link: "https://github.com/philay3/Workflow-Visualizer",
     image: "/images/fullstack-visualizer.png",
     alt: "Fullstack Visualizer interface showing repeatable workflow checklists and HTTP request logging.",
   },

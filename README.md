@@ -1,39 +1,80 @@
-# Next Chapter Labs
+# Phil Anthony — Personal Portfolio 🌐
 
-A living journal of every lab and exercise from the [Next Chapter](https://www.nextchapterproject.org/) AI Augmented Builder Bootcamp. Deployed at [philanthony.dev/labs](https://philanthony.dev/labs/).
+[![Next.js](https://img.shields.io/badge/Next.js-16.2-000000?style=flat&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.0-20232A?style=flat&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?style=flat&logo=vercel&logoColor=white)](https://vercel.com/)
 
-## About
+My personal portfolio site built using the Next.js App Router, styled with Tailwind CSS v4, and written in TypeScript. Deployed live at **[philanthony.dev](https://philanthony.dev/)**.
 
-Tree explorer on the left, full writeup on the right. Each lab is a markdown file rendered into the main pane with marked.js. No build step, no framework. Just HTML, CSS, vanilla JS.
+---
 
-Lives as a subfolder of my [personal portfolio repo](https://github.com/philay3/Personal-Portfolio) and deploys to philanthony.dev/labs/ via the same Vercel project.
+## ✨ Features
 
-## Stack
+* **Premium Ledger Aesthetic:** Designed with a curated **Balsam & Cedar** warm-paper ledger look (warm cream backgrounds, deep cedar/forest-green text, and brick-red emphasis/hover highlights).
+* **Scroll Spy Navigation:** Responsive navigation bar that highlights the current page section dynamically as the user scrolls, using the `IntersectionObserver` API.
+* **Featured Projects Showcase:** Highlighted cards for core fullstack systems:
+  * **[Legal Prospector](https://legal-prospect.vercel.app):** A ZIP code lookup and LLM-grounded company scraper pipeline.
+  * **[Workflow Visualizer](https://github.com/philay3/Workflow-Visualizer):** A task/step tracking UI with parallel-fetch logging.
+  * **[Digital Footprinter](https://kttjdtttsc-jpg.github.io/):** A terminal-styled browser header inspector.
+* **Polished Screenshot Gallery:** A landscape-optimized layout displaying core application workflows and mockups cleanly.
+* **Static `/labs` Subsite Integration:** Serves the bootcamp learning log archive dynamically under `/labs/` out of the static `public/labs/` subdirectory.
 
-- HTML5
-- CSS3 (custom properties, grid, flexbox)
-- Vanilla JavaScript (tree rendering, async fetch, delegated click handling)
-- [marked.js](https://marked.js.org/) via CDN for markdown rendering
-- Vercel for hosting
+---
 
-## Structure
+## 🛠️ Project Structure
 
 ```
-labs/
-├── index.html       Site shell (sidebar tree + main content pane)
-├── style.css        Design tokens, tree, lab body
-├── script.js        Tree rendering and async lab loading
-├── labs.js          Index of weeks, days, and lab metadata
-├── content/         One markdown file per lab, named after the lab id
-└── images/          Screenshots used in lab writeups
+Personal-Portfolio/
+├── app/
+│   ├── favicon.ico
+│   ├── globals.css         # Tailwind v4 theme configurations & styling layers
+│   ├── layout.tsx          # Main HTML wrap, Google Fonts (Fraunces & Inter)
+│   └── page.tsx            # Main Single Page App (Bio, Projects, Substack, Gallery)
+├── public/
+│   ├── images/             # UI screenshots & assets
+│   └── labs/               # The legacy static HTML/CSS/JS learning log subsite
+├── legacy-portfolio/       # Backup copies of the original portfolio files
+├── package.json            # Scripts & project dependencies
+├── next.config.ts          # Next.js bundler settings
+├── tsconfig.json           # Type mapping configurations
+└── README.md               # This file
 ```
 
-## Lab IDs
+---
 
-`w{WEEK}d{DAY}l{LAB}` - e.g. `w1d1l1` is Week 1 Day 1 Lab 1. Stable and sortable.
+## 🚀 Getting Started
 
-## Author
+### Prerequisites
 
-Phil Anthony.
+Make sure you have [Node.js](https://nodejs.org) (v18+) installed.
 
-[GitHub](https://github.com/philay3) · [LinkedIn](https://www.linkedin.com/in/phillip-anthony-75280778/) · [Twitter](https://twitter.com/upnupent) · [Substack](https://substack.com/@philay3)
+### Setup and Run
+
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/philay3/Personal-Portfolio.git
+   cd Personal-Portfolio
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) to view the local copy.
+
+---
+
+## 👤 Author
+
+* **Phil Anthony**
+* **GitHub:** [@philay3](https://github.com/philay3)
+* **LinkedIn:** [phillip-anthony-75280778](https://www.linkedin.com/in/phillip-anthony-75280778/)
+* **Substack:** [philanthony3](https://substack.com/@philay3)
